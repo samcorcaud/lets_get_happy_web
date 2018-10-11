@@ -1,28 +1,47 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Login} from './Login';
+import {SignIn} from './SignIn';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+
+    constructor(props) {
+        super(props);
+        this.state = {currentPage: "Login"}; // et
+
+        this.showLogin = this.showLogin.bind(this);
+        this.showSignIn = this.showSignIn.bind(this);
+    }
+    showLogin(){
+        this.setState({
+            currentPage: "Login"
+        })
+    }
+
+    showSignIn(){
+        this.setState({
+            currentPage: "Sign In"
+        })
+    }
+
+    render() {
+        console.log(this.state)
+        if(this.state.currentPage === "Login") {
+            return (
+                <div className="App">
+                <Login showSignIn={this.showSignIn}/>
+            </div>
+        );
+        }
+        else if(this.state.currentPage === "Sign In"){
+            return (
+                <div className="App">
+                <SignIn showLogin={this.showLogin}/>
+            </div>
+        );
+        }
+    }
 }
 
 export default App;
